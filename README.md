@@ -17,7 +17,8 @@ This repository serves as a quickstart template for building a Godot Android plu
 developing Godot Android plugins. You can install the latest version from https://developer.
 android.com/studio.
 
-To use this template, log in to github and click the green "Use this template" button at the top of the repository page.
+To use this template, log in to github and click the green "Use this template" button at the top 
+of the repository page.
 This will let you create a copy of this repository with a clean git history.
 
 ### Configuring the template
@@ -61,3 +62,39 @@ plugin
 - Open [`plugin/demo/main.gd`](plugin/demo/main.gd) and update the logic as needed to reference 
   your plugin and its methods
 - Connect an Android device to your machine and run the demo on it
+
+#### Tips
+
+##### Simplify access to the exposed Java / Kotlin APIs
+
+To make it easier to access the exposed Java / Kotlin APIs in the Godot Editor, it's recommended to 
+provide one (or multiple) gdscript wrapper class for your plugin users to interface with.
+
+Those wrapper classes should be included in the `plugin/export_scripts_template/interface` 
+directory (create the directory if it doesn't exist).
+
+For example:
+
+```
+class_name PluginInterface extends Object
+
+## Interface used to access the functionality provided by this plugin
+
+var _plugin_name = "GDExtensionAndroidPluginTemplate"
+var _plugin_singleton
+
+func _init():
+	if Engine.has_singleton(_plugin_name):
+		_plugin_singleton = Engine.get_singleton(_plugin_name)
+	else:
+		printerr("Initialization error: unable to access the java logic")
+
+## Shows a 'Hello World' toast.
+func helloWorld():
+	if _plugin_singleton:
+		_plugin_singleton.helloWorld()
+	else:
+		printerr("Initialization error")
+
+```
+
