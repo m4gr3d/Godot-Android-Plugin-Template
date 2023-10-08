@@ -14,8 +14,8 @@ This repository serves as a quickstart template for building a Godot Android plu
 
 ## Usage
 **Note:** [Android Studio](https://developer.android.com/studio) is the recommended IDE for
-developing Godot Android plugins. You can install the latest version from https://developer.
-android.com/studio.
+developing Godot Android plugins. 
+You can install the latest version from https://developer.android.com/studio.
 
 To use this template, log in to github and click the green "Use this template" button at the top 
 of the repository page.
@@ -30,7 +30,7 @@ overview of the minimum set of modifications needed:
   * Open [`plugin/build.gradle.kts`](plugin/build.gradle.kts) and update the value for `pluginName`
   * Open [`plugin/export_scripts_template/plugin.cfg`](plugin/export_scripts_template/plugin.cfg)
     and update the value for `name`
-  * Open [`plugin/export_scripts_template/.export/editor_export_plugin.gd`](plugin/export_scripts_template/.export/editor_export_plugin.gd)
+  * Open [`plugin/export_scripts_template/export_plugin.gd`](plugin/export_scripts_template/export_plugin.gd)
     and update the value for `_plugin_name`
 * Update the package name of the Android plugin:
   * Open [`plugin/build.gradle.kts`](plugin/build.gradle.kts) and update the value for `pluginPackageName`
@@ -68,10 +68,7 @@ plugin
 ##### Simplify access to the exposed Java / Kotlin APIs
 
 To make it easier to access the exposed Java / Kotlin APIs in the Godot Editor, it's recommended to 
-provide one (or multiple) gdscript wrapper class for your plugin users to interface with.
-
-Those wrapper classes should be included in the `plugin/export_scripts_template/interface` 
-directory (create the directory if it doesn't exist).
+provide one (or multiple) gdscript wrapper class(es) for your plugin users to interface with.
 
 For example:
 

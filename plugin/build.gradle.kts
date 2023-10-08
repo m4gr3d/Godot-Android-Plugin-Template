@@ -56,18 +56,18 @@ val copyExportScriptsTemplate by tasks.registering(Copy::class) {
     into("src/main/assets/addons/$pluginName")
 }
 
-val copyDebugAARToAddons by tasks.registering(Copy::class) {
+val copyDebugAARToDemoAddons by tasks.registering(Copy::class) {
     description = "Copies the generated debug AAR binary to the plugin's addons directory"
     from("build/outputs/aar")
     include("$pluginName-debug.aar")
-    into("src/main/assets/addons/$pluginName/.bin/debug")
+    into("demo/addons/$pluginName/bin/debug")
 }
 
-val copyReleaseAARToAddons by tasks.registering(Copy::class) {
+val copyReleaseAARToDemoAddons by tasks.registering(Copy::class) {
     description = "Copies the generated release AAR binary to the plugin's addons directory"
     from("build/outputs/aar")
     include("$pluginName-release.aar")
-    into("src/main/assets/addons/$pluginName/.bin/release")
+    into("demo/addons/$pluginName/bin/release")
 }
 
 val cleanDemoAddons by tasks.registering(Delete::class) {
@@ -78,8 +78,8 @@ val copyAddonsToDemo by tasks.registering(Copy::class) {
     description = "Copies the plugin's output artifact to the output directory"
 
     dependsOn(cleanDemoAddons)
-    dependsOn(copyDebugAARToAddons)
-    dependsOn(copyReleaseAARToAddons)
+    finalizedBy(copyDebugAARToDemoAddons)
+    finalizedBy(copyReleaseAARToDemoAddons)
 
     from("src/main/assets/addons/$pluginName")
     into("demo/addons/$pluginName")
