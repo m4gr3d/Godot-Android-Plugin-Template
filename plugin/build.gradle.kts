@@ -39,7 +39,7 @@ android {
 
 dependencies {
     // TODO: Update the godot dep when 4.2 is stable
-    implementation("org.godotengine:godot:4.2.0.dev-SNAPSHOT")
+    implementation("org.godotengine:godot:4.2.0.beta-SNAPSHOT")
 }
 
 // BUILD TASKS DEFINITION
