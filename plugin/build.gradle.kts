@@ -39,23 +39,10 @@ android {
 
 dependencies {
     // TODO: Update the godot dep when 4.2 is stable
-    implementation("org.godotengine:godot:4.2.0.beta-SNAPSHOT")
+    implementation("org.godotengine:godot:4.2.0.rc-SNAPSHOT")
 }
 
 // BUILD TASKS DEFINITION
-val cleanAssetsAddons by tasks.registering(Copy::class) {
-    delete("src/main/assets/addons")
-}
-
-val copyExportScriptsTemplate by tasks.registering(Copy::class) {
-    description = "Copies the export scripts templates to the plugin's addons directory"
-
-    dependsOn(cleanAssetsAddons)
-
-    from("export_scripts_template")
-    into("src/main/assets/addons/$pluginName")
-}
-
 val copyDebugAARToDemoAddons by tasks.registering(Copy::class) {
     description = "Copies the generated debug AAR binary to the plugin's addons directory"
     from("build/outputs/aar")
@@ -75,24 +62,20 @@ val cleanDemoAddons by tasks.registering(Delete::class) {
 }
 
 val copyAddonsToDemo by tasks.registering(Copy::class) {
-    description = "Copies the plugin's output artifact to the output directory"
+    description = "Copies the export scripts templates to the plugin's addons directory"
 
     dependsOn(cleanDemoAddons)
     finalizedBy(copyDebugAARToDemoAddons)
     finalizedBy(copyReleaseAARToDemoAddons)
 
-    from("src/main/assets/addons/$pluginName")
+    from("export_scripts_template")
     into("demo/addons/$pluginName")
 }
 
-tasks.named("preBuild").dependsOn(copyExportScriptsTemplate)
-
 tasks.named("assemble").configure {
-    dependsOn(copyExportScriptsTemplate)
     finalizedBy(copyAddonsToDemo)
 }
 
 tasks.named<Delete>("clean").apply {
     dependsOn(cleanDemoAddons)
-    dependsOn(cleanAssetsAddons)
 }
