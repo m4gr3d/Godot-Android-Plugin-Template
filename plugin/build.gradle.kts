@@ -38,8 +38,7 @@ android {
 }
 
 dependencies {
-    // TODO: Update the godot dep when 4.2 is stable
-    implementation("org.godotengine:godot:4.2.0.rc-SNAPSHOT")
+    implementation("org.godotengine:godot:4.2.0.stable")
 }
 
 // BUILD TASKS DEFINITION
