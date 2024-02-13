@@ -64,6 +64,8 @@ plugin
 - Connect an Android device to your machine and run the demo on it
 
 #### Tips
+Additional dependencies added to [`plugin/build.gradle.kts`](plugin/build.gradle.kts) should be added to the `_get_android_dependencies`
+function in [`plugin/export_scripts_template/export_plugin.gd`](plugin/export_scripts_template/export_plugin.gd).
 
 ##### Simplify access to the exposed Java / Kotlin APIs
 
