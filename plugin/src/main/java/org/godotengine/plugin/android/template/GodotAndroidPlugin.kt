@@ -17,7 +17,7 @@ class GodotAndroidPlugin(godot: Godot): GodotPlugin(godot) {
      * Shows a 'Hello World' toast.
      */
     @UsedByGodot
-    private fun helloWorld() {
+    fun helloWorld() {
         runOnUiThread {
             Toast.makeText(activity, "Hello World", Toast.LENGTH_LONG).show()
             Log.v(pluginName, "Hello World")
